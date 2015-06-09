@@ -3,6 +3,7 @@ package com.worldline.fpl.myweather.view;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +16,19 @@ import com.worldline.fpl.myweather.model.DayForecast;
 import com.worldline.fpl.myweather.model.MainForecast;
 import com.worldline.fpl.myweather.model.Weather;
 import com.worldline.fpl.myweather.model.Wind;
+import com.worldline.fpl.myweather.service.ForecastLoadedInterface;
+import com.worldline.fpl.myweather.service.WeatherService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by a607937 on 09/06/2015.
  */
-public class DisplayForecastFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class DisplayForecastFragment extends Fragment implements AdapterView.OnItemClickListener, ForecastLoadedInterface {
 
     public static final String TAG = "DisplayForecastFragment";
 
@@ -49,6 +54,11 @@ public class DisplayForecastFragment extends Fragment implements AdapterView.OnI
         if (mCallback != null) {
             mCallback.onForecastSelected(forecasts.get(position));
         }
+    }
+
+    @Override
+    public void ForecastsLoaded(List<DayForecast> forecasts) {
+        Log.d("forecast", "coming back");
     }
 
     // Container Activity must implement this interface
@@ -97,6 +107,17 @@ public class DisplayForecastFragment extends Fragment implements AdapterView.OnI
             forecasts.add(f4);
         }
 
+        WeatherService weatherService=WeatherService.newInstance();
+
+        try {
+            weatherService.loadDayForecast(getActivity(),this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         ForecastAdapter forecastAdapter=new ForecastAdapter(getActivity(),forecasts);
         listForecasts.setAdapter(forecastAdapter);

@@ -1,5 +1,6 @@
 package com.worldline.fpl.myweather.model;
 
+import android.os.AsyncTask;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -37,11 +38,9 @@ public class Wind implements Serializable, Parcelable {
         }
     };
     //Parcelable constructor
-    public Wind(Parcel source) {
+    private Wind(Parcel source) {
         this.speed=source.readFloat();
         this.deg=source.readFloat();
-
-
     }
     
     

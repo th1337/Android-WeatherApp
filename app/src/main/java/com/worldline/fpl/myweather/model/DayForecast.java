@@ -11,7 +11,7 @@ import java.util.Date;
  * This class represents the Forecast for one day
  * Created by a607937 on 08/06/2015.
  */
-public class DayForecast implements Parcelable{
+public class DayForecast implements Parcelable {
 
     private Date dateForecast; //the forecast's date
 

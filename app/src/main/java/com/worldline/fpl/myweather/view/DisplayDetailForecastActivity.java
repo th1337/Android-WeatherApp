@@ -18,6 +18,7 @@ public class DisplayDetailForecastActivity extends FragmentActivity{
 
     public static Intent newIntent(Context context, DayForecast forecast) {
         Intent intent = new Intent(context, DisplayDetailForecastActivity.class);
+
         intent.putExtra(KEY_DAY_FORECAST, forecast);
 
         return intent;
