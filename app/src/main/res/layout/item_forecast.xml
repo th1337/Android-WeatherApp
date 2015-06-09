@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="sky is clear iofdkjghdfjhgfdk fdgkjdfgj kjfdghdfkjhg fkdjghfdkjh fdgjkhkjfdhgk"
+        android:textColor="@color/weather_list_text_description"
+        android:layout_marginTop="16dp"
+        android:layout_toLeftOf="@+id/temperature"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:id="@+id/description"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_marginRight="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/weather_list_text_date"
+        tools:text="03/08/2015"
+        android:layout_toLeftOf="@+id/temperature"
+        android:id="@+id/date"
+        android:layout_below="@+id/description"
+        android:layout_marginBottom="16dp"
+        android:layout_alignLeft="@+id/description" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Clear"
+        android:textColor="@color/weather_list_text_name"
+        android:layout_marginRight="8dp"
+        android:id="@+id/main"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/imageView"
+        android:layout_toStartOf="@+id/imageView" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/icon_weather"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="38°"
+        android:textColor="@color/weather_list_text_temperature"
+        android:layout_marginRight="8dp"
+        android:id="@+id/temperature"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/main"
+        android:layout_toStartOf="@+id/main" />
+</RelativeLayout>

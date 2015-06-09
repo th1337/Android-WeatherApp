@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">MyWeather</string>
+    <string name="main_information">Main Information</string>
+    <string name="weather_information">Weather</string>
+    <string name="clouds_wind_information"><![CDATA[Clouds & Wind]]></string>
+    <string name="temperature_information">Temperature</string>
+    <string name="pressure">Pressure</string>
+    <string name="pressure_information">Pressure</string>
+    <string name="temp_max">Maximal Temperature</string>
+    <string name="temp_min">Minimal Temperature</string>
+    <string name="temp">Temperature</string>
+    <string name="seal_level">Sea level pressure</string>
+    <string name="grnd_level">Ground level pressure</string>
+    <string name="other_information">Other</string>
+    <string name="humidity">Humidity</string>
+    <string name="temp_kf">temp_kf</string>
+    <string name="all">All</string>
+    <string name="wind_speed">Wind speed</string>
+    <string name="wind_deg">Wind orientation</string>
+    <string name="unit_humidity">\%</string>
+    <string name="unit_orientation">°</string>
+    <string name="unit_temperature">°C</string>
+    <string name="unit_pressure">hPa</string>
+    <string name="unit_speed">m/s</string>
+
+    <string name="format_temperature">%s°C</string>
+
+</resources>

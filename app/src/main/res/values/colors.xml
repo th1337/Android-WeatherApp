@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Palette -->
+    <color name="black">#000000</color>
+    <color name="grey">#888</color>
+
+    <!-- Functional -->
+    <color name="weather_list_text_description">@color/black</color>
+    <color name="weather_list_text_date">@color/grey</color>
+    <color name="weather_list_text_name">@color/black</color>
+    <color name="weather_list_text_temperature">@color/grey</color>
+
+</resources>
