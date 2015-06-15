@@ -10,17 +10,17 @@ import java.io.Serializable;
  */
 public class Cloud implements Serializable, Parcelable {
 
-    String all ;//cloudiness in %
+    int all ;//cloudiness in %
 
-    public Cloud(String all) {
+    public Cloud(int all) {
         this.all = all;
     }
 
-    public String getAll() {
+    public int getAll() {
         return all;
     }
 
-    public void setAll(String all) {
+    public void setAll(int all) {
         this.all = all;
     }
 
@@ -31,7 +31,7 @@ public class Cloud implements Serializable, Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(all);
+        dest.writeInt(all);
     }
 
     //Parcelable
@@ -51,7 +51,7 @@ public class Cloud implements Serializable, Parcelable {
     };
     //Parcelable constructor
     public Cloud(Parcel source) {
-        this.all=source.readString();
+        this.all=source.readInt();
 
 
 

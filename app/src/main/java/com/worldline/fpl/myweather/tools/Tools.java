@@ -1,47 +1,170 @@
 package com.worldline.fpl.myweather.tools;
 
 
+import android.content.Context;
 import android.util.Log;
 
-import java.io.BufferedReader;
+import com.worldline.fpl.myweather.model.Cloud;
+import com.worldline.fpl.myweather.model.DayForecast;
+import com.worldline.fpl.myweather.model.MainForecast;
+import com.worldline.fpl.myweather.model.Weather;
+import com.worldline.fpl.myweather.model.Wind;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by a607937 on 09/06/2015.
  */
 public class Tools {
 
+    /**
+     * This method allows to get Properties file from Assets
+     * @param context context to get Assets
+     * @param Filename the properties filename located in Assets
+     * @return the Properties object associated to the file
+     * @throws IOException
+     */
+    public static Properties getProperties(Context context,String Filename) throws IOException
 
-    // HTTP GET request
-   public static String sendGet(String url) throws IOException {
+    {
 
-
-
-        URL obj = new URL(url);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-        // optional default is GET
-        con.setRequestMethod("GET");
-
-
-        int responseCode = con.getResponseCode();
-
-
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-
-        //print result
-        Log.d("forecast response",response.toString());
-        return  response.toString();
+            InputStream inputStream = context.getAssets().open("app.properties");
+            Properties properties = new Properties();
+            properties.load(inputStream);
+            Log.d("forecast url", properties.getProperty("app.forecast.baseurl"));
+            return properties;
     }
+
+    /**
+     * This method allows to parse a JSONList into a DayForecast List.
+     * @param list the json list to parse
+     * @return a list of forecasts
+     * @throws JSONException
+     */
+    public static List<DayForecast> parseForecastList(JSONArray list) throws JSONException, ParseException {
+
+        List<DayForecast> result=new ArrayList<DayForecast>();
+        for(int i=0;i<list.length();i++ )
+        {
+            JSONObject currentForecast=list.getJSONObject(i);
+
+            String  dateTime=currentForecast.getString("dt_txt");
+            Date dateForecast=convertStringToDate(dateTime);
+
+            MainForecast mainForecast=parseMainForecast(currentForecast.getJSONObject("main"));//we get the mainForecast
+            Weather weatherForecast=parseWeatherForecast(currentForecast.getJSONArray("weather").getJSONObject(0));//we get the weather,
+            //we only get the first of the list.
+            Cloud cloudForecast=parseCloudForecast(currentForecast.getJSONObject("clouds"));//we get the clouds
+            Wind windForecast=parseWindForecast(currentForecast.getJSONObject("wind"));
+            Log.d("forecast json","time "+dateTime);
+
+            List<Weather> listWeather= new ArrayList<>();
+            listWeather.add(weatherForecast);
+            DayForecast currentDayForecast=new DayForecast(dateForecast, listWeather, mainForecast,cloudForecast,windForecast);
+            result.add(currentDayForecast);//the we add the dayforecast to the result
+
+        }
+
+
+        return result;
+
+    }
+
+
+    /**
+     * This method allows to parse a JSONObject into a Wind
+     * @param wind the JSONObject
+     * @return
+     */
+    private static Wind parseWindForecast(JSONObject wind) throws JSONException {
+       float speed= (float) wind.getDouble("speed");
+       float deg=(float) wind.getDouble("deg");
+
+        Wind result=new Wind( speed,  deg);
+        return result;
+    }
+
+    /**
+     * This method allows to parse a JSONObject into a Cloud
+     * @param cloud the JSONObject
+     * @return
+     */
+    private static Cloud parseCloudForecast(JSONObject cloud) throws JSONException {
+
+        int all=cloud.getInt("all");
+
+        Cloud result= new Cloud(all);
+        return result;
+    }
+
+    /**
+     * This method allows to parse a JSONObject into a Weather
+     * @param weather the JSONObject
+     * @return
+     */
+    private static Weather parseWeatherForecast(JSONObject weather) throws JSONException {
+
+        long id=weather.getLong("id");
+        String main=weather.getString("main");
+        String description=weather.getString("description");
+        String icon=weather.getString("icon");
+
+
+        Weather result = new Weather( id,  main, description,  icon);
+
+        return result;
+    }
+
+    /**
+     * This method allows to parse a JSONObject into a MainForecast
+     * @param main the JSONObject
+     * @return
+     */
+    private static MainForecast parseMainForecast(JSONObject main) throws JSONException {
+
+        float temp= (float) main.getDouble("temp");
+        float temp_min=(float) main.getDouble("temp_min");
+        float temp_max=(float) main.getDouble("temp_max");
+        float pressure=(float)main.getDouble("pressure");
+        float sea_level=(float)main.getDouble("sea_level");
+        float grnd_level=(float) main.getDouble("grnd_level");
+        int humidity=main.getInt("humidity");
+        float temp_kf=0;
+
+
+        MainForecast result=new MainForecast( temp,  temp_min,  temp_max,  pressure,  sea_level,  grnd_level,humidity,  temp_kf);
+
+        return result;
+    }
+
+
+    /**
+     * Converts a string into a date
+     * @param date
+     * @return
+     * @throws ParseException
+     */
+    public static Date convertStringToDate(String date) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date convertedDate = new Date();
+
+        convertedDate = dateFormat.parse(date);
+
+
+        return convertedDate;
+
+
+    }
+
 }

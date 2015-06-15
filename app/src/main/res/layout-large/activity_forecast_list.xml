@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/frags">
+    <!-- List -->
+    <FrameLayout
+        android:id="@+id/list_frag"
+        android:layout_weight="1.5"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+    <FrameLayout
+        android:id="@+id/detail_frag"
+        android:layout_weight="2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+  <!--  <fragment class="com.worldline.fpl.myweather.view.DisplayForecastFragment"
+        android:id="@+id/list_frag"
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:layout_height="match_parent"/>
+
+    <fragment class="com.worldline.fpl.myweather.view.DisplayDetailForecastFragment"
+        android:id="@+id/details_frag"
+        android:layout_weight="2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />-->
+</LinearLayout>
+
+    <ListView android:id="@+id/left_drawer"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/white"
+        android:dividerHeight="1dp"
+        android:background="@color/translucent_black"/>
+    </android.support.v4.widget.DrawerLayout>

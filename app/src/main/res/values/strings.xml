@@ -24,5 +24,9 @@
     <string name="unit_speed">m/s</string>
 
     <string name="format_temperature">%s°C</string>
+    <string name="drawer_open">OpenedDrawer</string>
+    <string name="drawer_close">ClosedDrawer</string>
+    <string name="select_filter">Filter</string>
+    <string name="please_select_item">Please select a forecast</string>
 
 </resources>

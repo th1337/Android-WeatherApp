@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 22
@@ -16,10 +17,33 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        productFlavors {
+            mock {
+                applicationId "com.worldline.fpl.myweather.mock"
+                versionName "1.0-mock"
+
+            }
+            full {
+                applicationId "com.worldline.fpl.myweather"
+                versionName "1.0-full"
+
+            }
+
+        }
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile 'com.google.dagger:dagger:2.0'
+    apt 'com.google.dagger:dagger-compiler:2.0'
+    provided 'javax.annotation:jsr250-api:1.0'
+
+    compile 'com.jakewharton:butterknife:6.1.0'
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:appcompat-v7:22.1.1'
 }

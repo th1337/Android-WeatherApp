@@ -3,8 +3,9 @@
 
     <!-- Palette -->
     <color name="black">#000000</color>
+    <color name="translucent_black">#111</color>
     <color name="grey">#888</color>
-
+    <color name="white">#fff</color>
     <!-- Functional -->
     <color name="weather_list_text_description">@color/black</color>
     <color name="weather_list_text_date">@color/grey</color>

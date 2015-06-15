@@ -2,25 +2,35 @@ package com.worldline.fpl.myweather.service;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.worldline.fpl.myweather.model.DayForecast;
-import com.worldline.fpl.myweather.tools.Tools;
+import com.worldline.fpl.myweather.tools.RestClient;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
  * Created by a607937 on 09/06/2015.
  */
-public class LoadForecastAsyncTask extends AsyncTask<Void, Void, List<DayForecast>>
+public class LoadForecastAsyncTask extends AsyncTask<Long, Void, List<DayForecast>>
 {
 
-    ForecastLoadedInterface mCallBack;
+    public static final String TAG = "LoadForecastAsyncTask";
+    protected  RestClient client;
 
-    public LoadForecastAsyncTask(Context context,ForecastLoadedInterface callBack)
+
+
+    private WeakReference<ForecastLoadedInterface> mCallBack;
+    private Context context;
+    private Exception pendingException;
+
+    public LoadForecastAsyncTask(RestClient client,Context context,ForecastLoadedInterface callBack)
     {
-        mCallBack=callBack;
+        mCallBack=new WeakReference<ForecastLoadedInterface>(callBack);
+        this.context=context;
+        this.client=client;
     }
 
     @Override
@@ -36,22 +46,35 @@ public class LoadForecastAsyncTask extends AsyncTask<Void, Void, List<DayForecas
     }
 
     @Override
-    protected List<DayForecast> doInBackground(Void... arg0) {
+    protected List<DayForecast> doInBackground(Long... cityId) {
 
-        String url = "http://api.openweathermap.org/data/2.5/weather?id=2996944";//TODO change it !
+        List<DayForecast> result=null;
         try {
-            Tools.sendGet(url);
+
+            result=client.getForecasts(cityId[0],"metric");
         } catch (IOException e) {
-            e.printStackTrace();
+
+            pendingException = e;
+            Log.e(TAG, "error during task", e);
         }
 
-
-        return null;
+        return result;
     }
 
     @Override
     protected void onPostExecute(List<DayForecast> result) {
-        mCallBack.ForecastsLoaded(result);
+
+        ForecastLoadedInterface ref = mCallBack.get();
+        if (ref == null || !ref.isValid()) {
+            return;
+        }
+
+        if(pendingException==null) {
+            ref.onForecastsLoaded(result);
+        }
+        else{
+            ref.onForecastLoadingError();
+        }
     }
 
 

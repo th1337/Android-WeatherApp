@@ -61,7 +61,7 @@ public class MainForecast implements Serializable, Parcelable {
     }
 
 
-    public MainForecast(float temp, float temp_min, float temp_max, int pressure, float sea_level, int grnd_level, int humidity, float temp_kf) {
+    public MainForecast(float temp, float temp_min, float temp_max, float pressure, float sea_level, float grnd_level, int humidity, float temp_kf) {
         this.temp = temp;
         this.temp_min = temp_min;
         this.temp_max = temp_max;

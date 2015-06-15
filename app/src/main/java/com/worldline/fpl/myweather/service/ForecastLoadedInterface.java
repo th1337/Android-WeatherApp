@@ -9,6 +9,8 @@ import java.util.List;
  */
 public interface ForecastLoadedInterface {
 
-    public void ForecastsLoaded(List<DayForecast> forecasts);
+    public void onForecastsLoaded(List<DayForecast> forecasts);
+    public void onForecastLoadingError();
 
+    boolean isValid();
 }
