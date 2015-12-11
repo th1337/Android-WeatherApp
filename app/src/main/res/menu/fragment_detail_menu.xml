@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/share_detail"
-        android:icon="@drawable/ic_share_black_24dp"
+        android:icon="@drawable/ic_share_white_24dp"
         app:showAsAction="ifRoom"
         android:orderInCategory="9"
         android:title="share">

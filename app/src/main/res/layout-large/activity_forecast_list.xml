@@ -20,17 +20,17 @@
         android:layout_weight="2"
         android:layout_width="0dp"
         android:layout_height="match_parent" />
-  <!--  <fragment class="com.worldline.fpl.myweather.view.DisplayForecastFragment"
-        android:id="@+id/list_frag"
-        android:layout_width="0dp"
-        android:layout_weight="1.5"
-        android:layout_height="match_parent"/>
+    <!--  <fragment class="DisplayForecastFragment"
+          android:id="@+id/list_frag"
+          android:layout_width="0dp"
+          android:layout_weight="1.5"
+          android:layout_height="match_parent"/>
 
-    <fragment class="com.worldline.fpl.myweather.view.DisplayDetailForecastFragment"
-        android:id="@+id/details_frag"
-        android:layout_weight="2"
-        android:layout_width="0dp"
-        android:layout_height="match_parent" />-->
+      <fragment class="DisplayDetailForecastFragment"
+          android:id="@+id/details_frag"
+          android:layout_weight="2"
+          android:layout_width="0dp"
+          android:layout_height="match_parent" />-->
 </LinearLayout>
 
     <ListView android:id="@+id/left_drawer"

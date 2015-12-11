@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<LinearLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -15,10 +20,11 @@
         tools:layout_height="90dp">
         <ImageView
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:src="@drawable/icon_weather"
             android:id="@+id/icon"
+
             android:layout_marginTop="8dp"
 
             android:layout_centerHorizontal="true" />
@@ -365,3 +371,5 @@
 
 
 </LinearLayout>
+
+    </ScrollView>
